@@ -1,0 +1,523 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Style for the header bar */
+.header {
+  background-color: #fff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Style for the brand */
+.brand {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Style for the location box */
+.location-box {
+  display: flex;
+  align-items: center;
+}
+
+.location-box i {
+  margin-right: 5px;
+  color: #ff6c37;
+}
+
+/* Style for the location */
+.location {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Style for the search bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  padding: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow */
+}
+
+.search-input {
+  width: 200px;
+  padding: 8px;
+  margin-right: 10px;
+  border: none;
+  font-size: 14px;
+  outline: none; /* Remove outline */
+}
+
+.search-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #ff6c37;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: #e65721;
+}
+
+/* Style for the header links */
+.header-links {
+  display: flex;
+  align-items: center;
+}
+
+.header-links a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.header-links a:not(:last-child) {
+  margin-right: 50px; /* Add margin for spacing */
+}
+
+/* Added styles for the container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* Changed height to min-height */
+  padding: 0 20px; /* Added padding */
+}
+
+/* Added styles for the rectangular frame */
+.rectangle-frame {
+  width: 100%; /* Changed width to 100% */
+  max-width: 800px; /* Added max-width */
+  height: 400px; /* Adjust height as needed */
+  border: 2px solid #000; /* Added border */
+  display: flex;
+  margin-top: 20px; /* Added margin-top */
+}
+
+/* Added styles for the image boxes */
+.image-box {
+  flex: 1; /* Equal width for both image boxes */
+  overflow: hidden; /* Ensure images don't overflow */
+}
+
+/* Added styles for the divider */
+.divider {
+  width: 2px;
+  background-color: #000;
+}
+
+/* Added styles for the images */
+.rectangle-frame img {
+  width: 100%; /* Make images fill the container */
+}
+
+/* Added styles for the order box */
+.order-box {
+  position: absolute;
+  top: 50%; /* Adjust as needed */
+  right: 20px; /* Adjust horizontal position */
+  transform: translateY(-50%);
+  padding: 10px;
+  background-color: #fff;
+  border: 2px solid #fff; /* Changed border color to white */
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(255, 108, 55, 0.4); /* Changed shadow color */
+  z-index: 1;
+}
+
+/* Added styles for the order button */
+.order-btn {
+  display: block; /* Ensure button takes full width */
+  width: 100%;
+  padding: 8px 0; /* Adjusted padding */
+  border: none;
+  border-radius: 20px;
+  background-color: #ff6c37; /* Orange color */
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px; /* Added margin-top */
+}
+
+.order-btn:hover {
+  background-color: #e65721; /* Darker shade of orange on hover */
+}
+
+/* Media query for responsive design */
+@media only screen and (max-width: 768px) {
+  .container {
+    padding: 0 10px; /* Adjusted padding */
+  }
+
+  .header {
+    padding: 10px 20px; /* Adjusted padding */
+  }
+
+  .brand {
+    font-size: 20px; /* Adjusted font size */
+  }
+
+  .location-box {
+    display: none; /* Hide location box on small screens */
+  }
+
+  .search-input {
+    width: 150px; /* Adjusted width */
+  }
+
+  .header-links a:not(:last-child) {
+    margin-right: 20px; /* Adjusted margin */
+  }
+
+  .rectangle-frame {
+    flex-direction: column; /* Stack images vertically on small screens */
+    height: auto; /* Allow height to adjust based on content */
+  }
+
+  .divider {
+    display: none; /* Hide divider on small screens */
+  }
+
+  .order-box {
+    position: static; /* Remove absolute positioning */
+    margin-top: 20px; /* Added margin-top */
+    padding: 20px; /* Adjusted padding */
+    width: 100%; /* Ensure the order box takes full width */
+  }
+
+  .order-btn {
+    width: auto; /* Reset width to auto for smaller screens */
+  }
+}
+
+/* Rest of your existing CSS styles */
+/* Added styles for the order box */
+.order-box {
+  position: absolute;
+  top: 122px; /* Adjusted top position */
+  right: 20px; /* Adjusted horizontal position */
+  padding: 10px;
+  background-color: #fff;
+  border: 2px solid #fff; /* Changed border color to white */
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(255, 108, 55, 0.4); /* Changed shadow color */
+  z-index: 1;
+}
+
+/* Added styles for the order button */
+.order-btn {
+  display: block; /* Ensure button takes full width */
+  width: 100%;
+  padding: 8px 0; /* Adjusted padding */
+  border: none;
+  border-radius: 20px;
+  background-color: #ff6c37; /* Orange color */
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-btn:hover {
+  background-color: #e65721; /* Darker shade of orange on hover */
+}
+
+
+/* Modal Backdrop Blur Effect */
+.modal-backdrop {
+    backdrop-filter: blur(8px);
+}
+
+/* Adjust Modal Position */
+.modal-dialog {
+    margin-top: 10%;
+}
+
+
+.circle-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+}
+
+.submit-review-section {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  width: 80%; /* Adjust the width as needed */
+  max-width: 600px; /* Set maximum width */
+  margin: 20px auto; /* Center the section horizontally */
+}
+
+.submit-review-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.submit-review-form {
+  margin-bottom: 20px;
+}
+
+.submit-review-form textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.submit-review-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.submit-review-rating label {
+  margin-right: 10px;
+}
+
+.submit-review-submit-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit-review-submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse; /* Reverse the order of the stars */
+}
+
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 30px; /* Adjust the font size to control the size of the star */
+  cursor: pointer;
+  margin-left: 5px; /* Add some spacing between stars */
+}
+
+.star-rating label:before {
+  content: "\f005"; /* Font Awesome solid star icon */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900; /* Ensure the correct weight for solid icon */
+  color: #ccc; /* Set default color to gray */
+}
+
+/* Change the color of selected stars based on the rating */
+.star-rating input[type="radio"]:checked ~ label:before {
+  color: #ffc107; /* Set color to yellow for selected stars */
+}
+
+.order-online-box {
+  border: 2px solid #ccc; /* Add a border */
+  border-radius: 10px; /* Add rounded corners */
+  padding: 20px; /* Add some padding */
+  margin-top: 30px; /* Add margin for spacing */
+}
+
+/* Added styles for the order button */
+.order-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #ff6c37; /* Orange color */
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px; /* Added margin for spacing */
+}
+
+.order-btn:hover {
+  background-color: #e65721; /* Darker shade of orange on hover */
+}
+/* Added styles for the order box */
+.order-box {
+  position: absolute;
+  top: 250px; /* Adjust as needed */
+  left: 50px; /* Adjust horizontal position */
+  padding: 10px;
+  background-color: #fff;
+  border: 2px solid #ff6c37; /* Orange color */
+  border-radius: 10px;
+  z-index: 1;
+}
+
+/* Updated styles for the order box */
+.order-box {
+  position: absolute;
+  top: 250px; /* Adjust as needed */
+  left: 50px; /* Adjust horizontal position */
+  padding: 10px;
+  background-color: #fff;
+  border: 2px solid #fff; /* Changed border color to white */
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(255, 108, 55, 0.4); /* Changed shadow color */
+  z-index: 1;
+}
+
+/* Added styles for the order button */
+.order-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #ff6c37; /* Orange color */
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-btn:hover {
+  background-color: #e65721; /* Darker shade of orange on hover */
+}
+
+/* Rest of your existing CSS styles */
+.styles_vegOnlyLabel__HR3Ii {
+    font-size: 1rem;
+    color: #3d4152;
+    font-weight: 600;
+}
+
+.category-btn-veg,
+.category-btn-non-veg {
+    border-radius: 20px;
+}
+.order-form {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .order-form h2 {
+        margin-bottom: 20px;
+    }
+
+    .order-form .form-group {
+        margin-bottom: 15px;
+    }
+
+    .order-form button[type="submit"] {
+        width: 100%;
+    }
+
+    /* Selected item style */
+    .selected-item {
+        background-color: #f1f1f1;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .selected-item:hover {
+        background-color: #e1e1e1;
+    }
+    /* Custom CSS for quantity buttons */
+.quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #007bff; /* Default button color */
+}
+
+.quantity-btn:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.quantity-btn:focus {
+    outline: none;
+}
+
+.quantity-btn:active {
+    transform: scale(0.9);
+}
+
+.quantity-text {
+    margin: 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff; /* Quantity text color */
+}
+
+.contact-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+/* Style for the contact input field when focused */
+.contact-input:focus {
+    border-color: #007bff; /* Change border color to a primary color when focused */
+}
+
+#photos {
+  width: 100%;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  grid-auto-rows: minmax(200px, auto); /* Set a minimum row height */
+  grid-gap: 10px; /* Adjust the gap between grid items as needed */
+}
+
+.photo-item {
+  position: relative; /* Position relative for absolute positioning of images */
+  overflow: hidden; /* Hide overflowing content */
+}
+
+.photo-item img {
+  width: 100%; /* Ensure the image fills its container */
+  height: 100%; /* Ensure the image fills its container */
+  object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+}

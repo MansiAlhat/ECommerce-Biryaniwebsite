@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineers Biryani</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/main_page.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-mpp4DwCJhKHPgLDBkL7tZYP8sj/QK0rGwME6SygsZn6C9t5o2+Mws5y6h0RcMz5c" crossorigin="anonymous">
+
+    <style>
+        #photos {
+  width: 100%;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  grid-auto-rows: minmax(200px, auto); /* Set a minimum row height */
+  grid-gap: 20px; /* Increase the gap between grid items */
+}
+
+.photo-item {
+  position: relative; /* Position relative for absolute positioning of images */
+  overflow: hidden; /* Hide overflowing content */
+  margin: 10px; /* Increase margin around each image */
+}
+
+.photo-item img {
+  width: 70%; /* Reduce the width of the image to 50% of its container width */
+  height: 70%; /* Reduce the height of the image to 50% of its container height */
+  object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+}
+
+    </style>
+
+</head>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    {% if messages %}
+        {% for message in messages %}
+            alert("{{ message }}");
+        {% endfor %}
+    {% endif %}
+});
+</script>
+<body>
+<div class="header">
+  <div class="brand">Engineers Biryani</div>
+  <div class="location-box">
+    <i class="fas fa-map-marker-alt"></i>
+    <div class="location">Pune</div>
+  </div>
+  <div class="search-bar">
+    <input type="text" class="search-input" placeholder="Search for food">
+    <button class="search-btn">Search</button>
+  </div>
+  <div class="header-links">
+    {% if user_email %}
+<!-- User Circle -->
+<!-- User Circle as Hyperlink -->
+<!-- User Circle as Hyperlink -->
+<a href="#" id="user-circle" style="display: inline-block; width: 40px; height: 40px; border-radius: 50%; text-align: center; line-height: 40px; cursor: pointer; text-decoration: none; background-color: #007bff; color: #fff; position: relative; z-index: 999;">
+    <span>{{ user_email|first|upper }}</span>
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-center align-items-center">
+        <!-- User Circle in Modal Header -->
+        <a href="#" id="user-circle-modal" class="circle-btn">
+            <span>{{ user_email|first|upper }}</span>
+        </a>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <!-- Email in Modal Body -->
+        <p>{{ user_email }}</p>
+        <!-- Logout Button -->
+        <button class="btn btn-primary" onclick="location.href='{% url 'logout' %}'">Log Out</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    {% else %}
+      <a href="#" class="underline" data-toggle="modal" data-target="#signinModal">Sign In</a>
+      <a href="#" class="underline" data-toggle="modal" data-target="#signupModal">Sign Up</a>
+    {% endif %}
+  </div>
+</div>
+
+<div class="container">
+  <!-- Updated order-box with Bootstrap classes -->
+
+  <div class="rectangle-frame">
+    <div class="image-box biryani-image">
+      <!-- Biryani Image -->
+      <img src="{% static 'img/acg.avif' %}" alt="Biryani">
+    </div>
+    <div class="divider"></div> <!-- Added divider -->
+    <div class="image-box gallery-images">
+      <!-- Gallery Image -->
+      <img src="{% static 'img/biryani.jpg' %}" alt="Gallery Image">
+    </div>
+  </div>
+</div>
+
+<!-- Signin Modal -->
+<div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="signinModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signinModalLabel">Sign In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Signin form -->
+        <form method="post" action="{% url 'signin' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password: </label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Sign In</button>
+        </form>
+        <div class="mt-2">
+          Don't have an account? <a href="#" data-toggle="modal" data-target="#signupModal" data-dismiss="modal">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Signup Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Signup options -->
+        <p>Sign up with:</p>
+        <button class="btn btn-primary">Sign up with Google</button>
+        <hr>
+        <p>Or sign up with email and password:</p>
+        <form method="post" action="{% url 'sign_up' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="signup-name">Name:</label>
+            <input type="text" name="signup-name" class="form-control" id="signup-name" placeholder="Enter name">
+          </div>
+          <div class="form-group">
+            <label for="signup-email">Email address:</label>
+            <input type="email" name="signup-email" class="form-control" id="signup-email" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Password:</label>
+            <input type="password" name="signup-password" class="form-control" id="signup-password" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+        <div class="mt-2">
+          Already have an account? <a href="#" data-toggle="modal" data-target="#signinModal" data-dismiss="modal">Sign In</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="header-links" style="justify-content: center;"> <!-- To shift links to the middle -->
+    <a href="#overview" class="underline" style="color: black;">Overview</a>
+    <a href="#order-online" class="underline" style="color: black;">Order Online</a>
+    <a href="#reviews" class="underline" style="color: black;">Reviews</a>
+    <a href="#photos" class="underline" style="color: black;">Photos</a>
+    <a href="#menu" class="underline" style="color: black;">Menu</a>
+</div>
+
+<!-- Content section with headings -->
+<div id="overview">
+    <h2>Overview</h2>
+    <!-- Add overview content here -->
+</div>
+
+<div id="order-online" class="container-lg">
+    <div class="order-online-box" style="width: 100%; height: 800px; overflow-y: auto; box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.1);">
+        <!-- Order Online content -->
+        <h2>Order Online</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <!-- Search bar -->
+                <div class="search-bar d-flex justify-content-center">
+                    <input type="text" id="menu-search" class="search-input form-control" placeholder="Search Menu">
+                    <button id="search-btn" class="search-btn btn btn-primary">Search</button>
+                </div>
+                <!-- Category selection -->
+                <div class="category-selection d-flex mt-3">
+                    <button id="veg-btn" class="category-btn category-btn-veg btn btn-success rounded-pill mr-2" data-toggle="button" aria-pressed="false" autocomplete="off" onclick="showItems('veg')">Veg</button>
+                    <button id="non-veg-btn" class="category-btn category-btn-non-veg btn btn-danger rounded-pill" data-toggle="button" aria-pressed="false" autocomplete="off" onclick="showItems('non-veg')">Non-Veg</button>
+                </div>
+                <!-- Menu -->
+                <div class="menu-container mt-3">
+                    <h3 id="veg-heading">Veg Items</h3>
+                    <ul id="veg-menu" class="veg-menu">
+                        <li id="veg-item1" class="menu-item" onclick="showQuantitySelection('Vegetable Biryani', 8)">
+                            <i class="fas fa-carrot" style="color: green; font-size: 20px;"></i> Vegetable Biryani - $8
+                        </li>
+                        <li id="veg-item2" class="menu-item" onclick="showQuantitySelection('Paneer Biryani', 10)">
+                            <i class="fas fa-carrot" style="color: green; font-size: 20px;"></i> Paneer Biryani - $10
+                        </li>
+                    </ul>
+                    <h3 id="non-veg-heading" style="display: none;">Non-Veg Items</h3>
+                    <ul id="non-veg-menu" class="non-veg-menu" style="display: none;">
+                        <li id="non-veg-item1" class="menu-item" onclick="showQuantitySelection('Chicken Biryani', 12)">
+                            <i class="fas fa-drumstick-bite" style="color: red; font-size: 20px;"></i> Chicken Biryani - $12
+                        </li>
+                        <li id="non-veg-item2" class="menu-item" onclick="showQuantitySelection('Mutton Biryani', 15)">
+                            <i class="fas fa-drumstick-bite" style="color: red; font-size: 20px;"></i> Mutton Biryani - $15
+                        </li>
+                    </ul>
+                </div>
+                <!-- Quantity selection -->
+                <div id="quantity-selection" style="display: none;">
+                    <label for="quantity">Quantity:</label>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="decrementQuantity()">-</button>
+                        <input type="text" id="quantity" class="quantity-input form-control" value="1" readonly>
+                        <button class="quantity-btn" onclick="incrementQuantity()">+</button>
+                    </div>
+                    <button class="btn btn-primary mt-3" onclick="addToCart()">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <!-- Order Summary -->
+        <div class="order-summary mt-3">
+            <h2>Order Summary</h2>
+            <div id="order-items">
+                <!-- List of ordered items will be displayed here -->
+            </div>
+            <div>Total: $<span id="order-total">0</span></div>
+            <!-- Location and Contact -->
+            <div class="location-contact mt-3">
+                <h2>Location & Contact</h2>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" class="form-control" id="location" placeholder="Enter your location">
+                </div>
+<div class="form-group">
+    <label for="contact">Contact:</label>
+    <!-- Remove +91 from the default value and adjust the pattern -->
+    <input type="number" class="form-control contact-input" id="contact" name="contact" value="" pattern="[0-9]{10}" maxlength="10" title="Please enter a 10-digit contact number" required>
+    <small id="contact-error" class="text-danger" style="display: none;">Please enter a valid 10-digit contact number.</small>
+</div>
+
+
+
+            </div>
+        </div>
+        <!-- Place Order -->
+        <div class="place-order mt-3">
+            <button class="btn btn-primary" onclick="placeOrder()">Place Order</button>
+        </div>
+    </div>
+    <!-- Confirm Order Modal -->
+    <div class="modal fade" id="confirmOrderModal" tabindex="-1" role="dialog" aria-labelledby="confirmOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmOrderModalLabel">Confirm Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="orderDetails">
+                    <!-- Order details will be displayed here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="cancelOrder()" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="finalizeOrder()">Confirm Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+<div id="reviews" style="padding: 50px;">
+    <h2>Reviews</h2>
+    <br>
+    <br>
+    <div class="row">
+        {% for review in reviews %}
+        <div class="col-md-6 mb-4">
+            <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
+                <div class="card-body" style="padding: 20px;">
+                    <h5 class="card-title">{{ review.0 }}</h5> <!-- User Name -->
+                    <p class="card-text">{{ review.1 }}</p> <!-- Review Text -->
+                    <p class="card-text">
+                        {% if review.2 == 1 %}
+                            <span style="color: yellow;">⭐</span>
+                        {% elif review.2 == 2 %}
+                            <span style="color: yellow;">⭐⭐</span>
+                        {% elif review.2 == 3 %}
+                            <span style="color: yellow;">⭐⭐⭐</span>
+                        {% elif review.2 == 4 %}
+                            <span style="color: yellow;">⭐⭐⭐⭐</span>
+                        {% elif review.2 == 5 %}
+                            <span style="color: yellow;">⭐⭐⭐⭐⭐</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<div class="submit-review-section">
+  <h2 class="submit-review-title">Submit a Review</h2>
+  <form class="submit-review-form" method="post" action="{% url 'submit_review' %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="review">Review:</label>
+      <textarea name="review" class="form-control" id="review" rows="5" placeholder="Enter your review" required></textarea>
+    </div>
+    <div class="form-group">
+<div class="submit-review-rating">
+  <label for="rating">Rating:</label>
+  <div class="star-rating">
+    <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+    <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+    <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+    <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+    <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+  </div>
+</div>
+
+    <button type="submit" class="submit-review-submit-btn">Submit Review</button>
+  </form>
+</div>
+
+</div>
+
+<hr>
+
+<div id="photos">
+    <h2>Photos</h2>
+    <div class="photo-grid">
+        <div class="photo-item">
+            <img src="{% static 'img/1.jpeg' %}" alt="Photo 1">
+        </div>
+        <div class="photo-item">
+            <img src="{% static 'img/2.jpeg' %}" alt="Photo 2">
+        </div>
+        <div class="photo-item">
+            <img src="{% static 'img/3.jpeg' %}" alt="Photo 3">
+        </div>
+        <div class="photo-item">
+            <img src="{% static 'img/4.jpeg' %}" alt="Photo 4">
+        </div>
+    </div>
+</div>
+
+
+<div id="menu">
+    <h2>Menu</h2>
+    <!-- Add menu content here -->
+</div>
+
+<script>
+document.getElementById('contact').addEventListener('input', function() {
+    var contact = this.value.replace(/\D/g, ''); // Remove non-digit characters
+    if (contact.length < 10) {
+        document.getElementById('digit-error').style.display = 'block'; // Display error message
+    } else {
+        document.getElementById('digit-error').style.display = 'none'; // Hide error message
+    }
+});
+</script>
+
+<script>
+// Toggle User Popup Function
+function toggleUserPopup() {
+    var popup = document.getElementById("user-popup");
+    popup.style.display = popup.style.display === "none" ? "block" : "none";
+}
+
+// Add Event Listener to User Circle
+document.getElementById("user-circle").addEventListener("click", function() {
+    $('#userModal').modal('show');
+});
+
+
+</script>
+<script>
+  function showItems(category) {
+    var vegMenu = document.querySelector('.veg-menu');
+    var nonVegMenu = document.querySelector('.non-veg-menu');
+
+    if (category === 'veg') {
+      vegMenu.style.display = 'block';
+      nonVegMenu.style.display = 'none';
+    } else {
+      vegMenu.style.display = 'none';
+      nonVegMenu.style.display = 'block';
+   }
+}
+var selectedItem = null;
+var cartItems = [];
+
+function showQuantitySelection(name, price) {
+    selectedItem = {
+        name: name,
+        price: price,
+        quantity: 1
+    };
+    document.getElementById('quantity-selection').style.display = 'block';
+}
+
+function incrementQuantity() {
+    selectedItem.quantity++;
+    document.getElementById('quantity').value = selectedItem.quantity;
+}
+
+function decrementQuantity() {
+    if (selectedItem.quantity > 1) {
+        selectedItem.quantity--;
+        document.getElementById('quantity').value = selectedItem.quantity;
+    }
+}
+
+function addToCart() {
+    if (selectedItem) {
+        // Add selectedItem to cart
+        cartItems.push(selectedItem);
+        updateOrderSummary();
+        // Reset quantity selection
+        document.getElementById('quantity-selection').style.display = 'none';
+        selectedItem = null;
+    }
+}
+
+function updateOrderSummary() {
+    var orderItems = document.getElementById('order-items');
+    var total = 0;
+    orderItems.innerHTML = '';
+    cartItems.forEach(function(item) {
+        var itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        orderItems.innerHTML += '<div>' + item.name + ' x ' + item.quantity + ' - $' + itemTotal + '</div>';
+    });
+    document.getElementById('order-total').textContent = total;
+}
+
+function placeOrder() {
+    var location = document.getElementById('location').value;
+    var contact = document.getElementById('contact').value;
+    // Prepare order details
+    var orderDetails = '<p><strong>Location:</strong> ' + location + '</p>';
+    orderDetails += '<p><strong>Contact:</strong> ' + contact + '</p>';
+    orderDetails += '<p><strong>Items:</strong></p>';
+    cartItems.forEach(function(item) {
+        var itemTotal = item.price * item.quantity;
+        orderDetails += '<p>' + item.name + ' x ' + item.quantity + ' - $' + itemTotal + '</p>';
+    });
+    orderDetails += '<p><strong>Total:</strong> $' + calculateTotal() + '</p>';
+    // Update modal content
+    document.getElementById('orderDetails').innerHTML = orderDetails;
+    // Display modal
+    $('#confirmOrderModal').modal('show');
+}
+
+function calculateTotal() {
+    var total = 0;
+    cartItems.forEach(function(item) {
+        total += item.price * item.quantity;
+    });
+    return total;
+}
+
+function finalizeOrder() {
+    // Add logic to finalize the order
+    // For now, let's just clear the cart
+    cartItems = [];
+    updateOrderSummary();
+    $('#confirmOrderModal').modal('hide');
+}
+    function cancelOrder() {
+    // Reset the cart and update order summary
+    cartItems = [];
+    updateOrderSummary();
+}
+
+
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
